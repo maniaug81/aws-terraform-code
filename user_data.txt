@@ -1,0 +1,23 @@
+#!/bin/bash
+#SSM-Agent install
+cd /tmp
+sudo dnf install -y https://s3.ap-northeast-1.amazonaws.com/amazon-ssm-ap-northeast-1/latest/linux_amd64/amazon-ssm-agent.rpm
+sudo systemctl enable amazon-ssm-agent
+sudo systemctl start amazon-ssm-agent
+
+#CloudWatchAgent install
+curl https://s3.ap-northeast-1.amazonaws.com/amazoncloudwatch-agent-ap-northeast-1/redhat/amd64/latest/amazon-cloudwatch-agent.rpm -o /tmp/amazon-cloudwatch-agent.rpm
+rpm -U /tmp/amazon-cloudwatch-agent.rpm
+
+#AWSCLI install
+curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.3.7.zip -o /tmp/awscliv2.zip
+sudo yum install unzip -y
+sudo unzip /tmp/awscliv2.zip -d /tmp
+sudo /tmp/aws/install
+
+sudo yum install httpd
+sudo systemctl enable httpd
+sudo systemctl start httpd
+
+#change hostname
+hostnamectl set-hostname bastion-vm
