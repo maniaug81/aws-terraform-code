@@ -1,8 +1,0 @@
-resource "aws_instance" "Bastion01" {
-  ami           = "ami-01a4f99c4ac11b03c"
-  instance_type = "t2.micro"
-  subnet_id = aws_subnet.manishVPC-tf-pub-sub-1a.id
-  tags = {
-    Name = "Bastion-vms"
-  }
-}

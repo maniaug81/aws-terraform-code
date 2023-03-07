@@ -15,13 +15,9 @@ sudo yum install unzip -y
 sudo unzip /tmp/awscliv2.zip -d /tmp
 sudo /tmp/aws/install
 
-sudo yum install epel-release -y
-
-sudo yum install httpd -y
+sudo yum install httpd
 sudo systemctl enable httpd
 sudo systemctl start httpd
-
-sudo yum install ansible -y
 
 #change hostname
 hostnamectl set-hostname bastion-vm
