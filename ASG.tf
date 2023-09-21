@@ -2,7 +2,7 @@ resource "aws_launch_template" "ManishASG-tf-template" {
     name = "ManishASG-tf-template"
     image_id="ami-01a4f99c4ac11b03c"
     instance_type = "t2.micro"
-    key_name = "nginx-key"  
+    key_name = "cfi-mumbai-key"  
     #security_group_names = aws_security_group.manishVPC-tf-pub-SG
     vpc_security_group_ids = [aws_security_group.manishVPC-tf-pub-SG.id]
     
