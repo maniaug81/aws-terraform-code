@@ -1,12 +1,12 @@
 resource "aws_vpc" "CFIVPC-tf" {
-  cidr_block = "192.168.0.0/16"
+  cidr_block = var.vpccidr
   instance_tenancy = "default"
   enable_dns_hostnames = true
   enable_dns_support = true
 
   tags = {
-    Name = "CFIVPC-tf"
-    Project = "test-tf"
+    Name = var.vpcname
+    Project = "CFI"
   }
 }
 
@@ -15,31 +15,31 @@ resource "aws_internet_gateway" "CFIVPC-tf-igw" {
 
   tags = {
     Name = "CFIVPC-tf-igw"
-    Project = "test-tf"
+    Project = "CFI"
   }
 }
 
 resource "aws_subnet" "CFIVPC-tf-pub-sub-1a" {
   vpc_id     = aws_vpc.CFIVPC-tf.id
-  cidr_block = "192.168.1.0/24"
-  availability_zone = "ap-south-1a"
+  cidr_block = var.subnet1cidr
+  availability_zone = var.az1
   map_public_ip_on_launch = true
 
   tags = {
     Name = "CFIVPC-tf-pub-sub-1a"
-    Project = "test-tf"    
+    Project = "CFI"
   }
 }
 
 resource "aws_subnet" "CFIVPC-tf-pub-sub-1b" {
   vpc_id     = aws_vpc.CFIVPC-tf.id
-  cidr_block = "192.168.2.0/24"
-  availability_zone = "ap-south-1b"
+  cidr_block = var.subnet2cidr
+  availability_zone = var.az2
   map_public_ip_on_launch = true
 
   tags = {
     Name = "CFIVPC-tf-pub-sub-1b"
-    Project = "test-tf"    
+    Project = "CFI"
   }
 }
 
@@ -52,7 +52,7 @@ resource "aws_route_table" "CFIVPC-tf-pub-rt" {
   }
   tags = {
     Name = "CFIVPC-tf-pub-rt"
-    Project = "test-tf"    
+    Project = "CFI"
   }
 }
 resource "aws_route_table_association" "a" {
