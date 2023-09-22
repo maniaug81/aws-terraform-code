@@ -1,32 +1,32 @@
-resource "aws_alb" "manishLB-tf-pub" {
-  name = "manishLB-tf-pub"
+resource "aws_alb" "CFILB-tf-pub" {
+  name = "CFILB-tf-pub"
   internal = false
   load_balancer_type = "application"
-  security_groups = [aws_security_group.manishVPC-tf-pub-SG.id]
-  subnets = [aws_subnet.manishVPC-tf-pub-sub-1b.id,aws_subnet.manishVPC-tf-pub-sub-1a.id]
+  security_groups = [aws_security_group.CFIVPC-tf-pub-SG.id]
+  subnets = [aws_subnet.CFIVPC-tf-pub-sub-1b.id,aws_subnet.CFIVPC-tf-pub-sub-1a.id]
   tags = {
     Name = "pub-LB-tf"
     Project = "test-tf"        
   }
 }
-resource "aws_lb_target_group" "manishLB-tf-pub-TG" {
-  name = "manishLB-tf-pub-TG"
+resource "aws_lb_target_group" "CFILB-tf-pub-TG" {
+  name = "CFILB-tf-pub-TG"
   port = 80
   protocol = "HTTP"
-  vpc_id = aws_vpc.manishVPC-tf.id
+  vpc_id = aws_vpc.CFIVPC-tf.id
   tags = {
     Name = "pub-LB-TG-tf"
     Project = "test-tf"        
   }
 }
 # Attach the target group to the ALB
-resource "aws_alb_listener" "manishALB-tf-listner" {
-  load_balancer_arn = aws_alb.manishLB-tf-pub.arn
+resource "aws_alb_listener" "CFIALB-tf-listner" {
+  load_balancer_arn = aws_alb.CFILB-tf-pub.arn
   port = "80"
   protocol = "HTTP"
 
   default_action {
-    target_group_arn = aws_lb_target_group.manishLB-tf-pub-TG.arn
+    target_group_arn = aws_lb_target_group.CFILB-tf-pub-TG.arn
     type = "forward"
   }
   tags = {

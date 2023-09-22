@@ -1,10 +1,10 @@
-resource "aws_security_group" "manishVPC-tf-pub-SG" {
-  name        = "manishVPC-tf-pub-SG"
+resource "aws_security_group" "CFIVPC-tf-pub-SG" {
+  name        = "CFIVPC-tf-pub-SG"
   description = "Allow internet access"
-  vpc_id      = aws_vpc.manishVPC-tf.id
+  vpc_id      = aws_vpc.CFIVPC-tf.id
 
   tags = {
-    Name = "manish-vpc-tf-SG-Bastion"
+    Name = "CFI-vpc-tf-SG-Bastion"
     Project = "test-tf"        
   }
 }
@@ -14,7 +14,7 @@ resource "aws_security_group_rule" "ssh_inbound" {
   to_port = 22
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.manishVPC-tf-pub-SG.id
+  security_group_id = aws_security_group.CFIVPC-tf-pub-SG.id
 }
 resource "aws_security_group_rule" "http_inbound" {
   type = "ingress"
@@ -22,7 +22,7 @@ resource "aws_security_group_rule" "http_inbound" {
   to_port = 80
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.manishVPC-tf-pub-SG.id
+  security_group_id = aws_security_group.CFIVPC-tf-pub-SG.id
 }
 
 resource "aws_security_group_rule" "https_inbound" {
@@ -31,7 +31,7 @@ resource "aws_security_group_rule" "https_inbound" {
   to_port = 443
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.manishVPC-tf-pub-SG.id
+  security_group_id = aws_security_group.CFIVPC-tf-pub-SG.id
 }
 
 resource "aws_security_group_rule" "public_out" {
@@ -40,5 +40,5 @@ resource "aws_security_group_rule" "public_out" {
   to_port     = 0
   protocol    = "-1"
   cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.manishVPC-tf-pub-SG.id
+  security_group_id = aws_security_group.CFIVPC-tf-pub-SG.id
 }
